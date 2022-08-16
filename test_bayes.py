@@ -45,37 +45,37 @@ def parameter_opt(name,CT_data,workbook,device=None):
     print(best_param)
     return(best_param)
 
-def main(name,CT_data,num_image_to_create,synth_image_path,ref_image,label_ref,device=None,labels=True):
+def main(automatic,x_ray,name,CT_data,num_image_to_create,synth_image_path,ref_image,label_ref,device=None,labels=True):
     
-    
-    if False: #Use bayesian optimisation
-        header=["gamma", "keypoint", "superglue","file name"]
-        with open('mycsv.csv','w',newline='') as f:
-            workbook=csv.writer(f)
-            workbook.writerow(header)
-            
-            params=parameter_opt(name,CT_data,workbook,device)
+   if x_ray:
+        if automatic: #Use bayesian optimisation
+            header=["gamma", "keypoint", "superglue","file name"]
+            with open('mycsv.csv','w',newline='') as f:
+                workbook=csv.writer(f)
+                workbook.writerow(header)
+
+                params=parameter_opt(name,CT_data,workbook,device)
+                opacity_points = np.array([[1800.0,  0.0],
+                                        [params['op1'], 0.0],
+                                        [params['op2'], 1.0],
+                                        [67335.0, 1.0]])
+                scalar_color_mapping_points = np.array([[1800, 0.5],
+                                                        [params['col1'], 0.5],
+                                                        [params['col2'], 0.5],
+                                                        [params['col3'], 0.5],
+                                                        [params['col4'], 0.5],
+                                                        [40000, 0.5]])
+        else:
             opacity_points = np.array([[1800.0,  0.0],
-                                    [params['op1'], 0.0],
-                                    [params['op2'], 1.0],
+                                    [22901.24, 0.0],
+                                    [33703.71, 1.0],
                                     [67335.0, 1.0]])
-            scalar_color_mapping_points = np.array([[1800, 0.5],
-                                                    [params['col1'], 0.5],
-                                                    [params['col2'], 0.5],
-                                                    [params['col3'], 0.5],
-                                                    [params['col4'], 0.5],
-                                                    [40000, 0.5]])
-    
-    opacity_points = np.array([[1800.0,  0.0],
-                            [22901.24, 0.0],
-                            [33703.71, 1.0],
-                            [67335.0, 1.0]])
-    scalar_color_mapping_points = np.array([[161.81, 0.5],
-                                            [18724.29, 0.5],
-                                            [26214.00, 0.5],
-                                            [39032.94, 0.5],
-                                            [46954.75, 0.5],
-                                            [65535.00, 0.5]]) 
+            scalar_color_mapping_points = np.array([[161.81, 0.5],
+                                                    [18724.29, 0.5],
+                                                    [26214.00, 0.5],
+                                                    [39032.94, 0.5],
+                                                    [46954.75, 0.5],
+                                                    [65535.00, 0.5]]) 
 
     dc.sim_xray_set_from_CT_folder(CT_data, device,opacity_points=opacity_points,scalar_color_mapping_points=scalar_color_mapping_points,ref_img=name,
                             num_images_per_unit=num_image_to_create,debug=False,
@@ -101,9 +101,12 @@ if __name__=='__main__':
                         default='./Test/iphone/iPhone 12 Pro Max/',
                         help='Path to save synthetic images')
     parser.add_argument('-b','--label',type=bool,default=False, help='True if labels have to generated else False')
+    parser.add_argument('-x','--x_ray',type=bool,default=True, help='True if x-rays have to be generated else False')
+    parser.add_argument('-a','--automatic', type=bool, default=True,
+                        help='True if parameter tuning has to be done automatically. False if manually')
     parser.add_argument('-l','--ref_image',default='./seg_label_mask/JPEGImages/motorola2_resized.png',type=str,help='Path for reference image to generate labels')
     parser.add_argument('-r','--label_ref',default='./seg_label_mask/SegmentationClass/motorola2_resized.png',type=str,help='Path for reference label image')
     parser.add_argument('-d','--device',default=1,type=bool,help='Enter 0 for Watch, 1 for iPhone, 2 for iPad')
     args=parser.parse_args()
     
-    main(args.image_name_real,args.CT_data,args.num_images_to_create,args.synth_image_path,args.ref_image,args.label_ref,labels=args.label,device=args.device)
+    main(args.automatic,args.x_ray,args.image_name_real,args.CT_data,args.num_images_to_create,args.synth_image_path,args.ref_image,args.label_ref,labels=args.label,device=args.device)
