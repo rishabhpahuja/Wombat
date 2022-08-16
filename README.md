@@ -5,7 +5,7 @@ This branch is reponsible for generating data to train 2D unet segmentation pipe
 1. Generating X-rays from CT scans
 2. 'Semi-automatically' labelling the X-rays generated
 
-Both these steps can be carried out by the same python file, called **test_bayes.py**
+Both these steps can be carried out by the same python file, called **test_bayes.py**, by typing python3 test_bayes.py with the necessary arguments explained below.
 
 ## Generating X-rays from CT scans
 
