@@ -1,12 +1,3 @@
-"""
-@author: Bassam Bikdash, Rishikesh Vanarse
-
-Load a LabelMe .xml annotation file output from CVAT
-Reference: www.programmersought.com/article/79336703053
-
-Input:  Path to .xml file
-Output: Python object containing the label, segmentation vertices, and ids of the segments
-"""
 
 import sys
 sys.path.append('../')
