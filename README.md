@@ -18,6 +18,7 @@ The arguments required for this section are:
 - **num_images_to_create:** Number of X-ray images to be created from CT scan
 - **synth_image_path:** Location where the X-rays generated have to be stored
 - **device:** This variable indicates whether the X-rays generated are of a smart watch, smart phone or a tablet. Input 0,1 or 2 respectively
+- **x_ray:** This varibale indicates if x-rays have to be generated from CT scans. Set this value to True to run this section of code.
 -**automatic:** This variable indicates if the tuning of the paramters to generate X-rays has to be done automatically or manually. If selected, False (manually), the values of the parameters *opacity_points* and *scalar_color_mapping_points* are found using a 3D visualizer software. We used an open source software called 3D Slicer (https://www.slicer.org/).
 
 ## 'Semi-automatically' labelling the X-rays generated
