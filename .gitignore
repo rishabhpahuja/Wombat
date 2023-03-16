@@ -3,3 +3,20 @@
 .Misc_files
 .*.png
 .test.py
+./Labels
+./models/weights/*.*
+./Orignal Code
+./Real Data
+./Reference_images
+./Reference_label
+./RO ML Video
+./seg_label_mask
+./Test
+./watch labels
+./*.xml
+./*.pth
+./*.csv
+./sample.txt
+./*.jpg
+./Downsize_image.py
+
