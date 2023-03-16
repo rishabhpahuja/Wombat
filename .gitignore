@@ -1,3 +1,8 @@
+.Arrange_images
+.Dataset
+.Misc_files
+.*.png
+.test.py
 ./Labels
 ./models/weights/*.*
 ./Orignal Code
