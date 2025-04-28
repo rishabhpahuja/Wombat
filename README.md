@@ -64,11 +64,3 @@ It uses two deep learning models, *superglue* and *superpoint* whose weights can
 ## Demon's registration
 
 This component can be run by running Demons.py <fixedImageFile> <movingImageFile> <fixedImageMask> <movingImageMask>, where fixedImageMask and movingImageMask, are the screw masks in image format of the respective image. The labelling is done usign an open sourse software called CVAT (https://cvat.org/). The code transforms the movingImageMask to fixedImageMask. This tranformation is done by using the respective images, fixed and moving and the input of fixedImageMask is just to test the effectiveness of the algorithm and is not used anywhere else in the code.
-
-
-
-
-
-
-
-
